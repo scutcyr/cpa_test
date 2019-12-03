@@ -4,7 +4,6 @@
 # # 中国人口分析
 # **作者**：陈艺荣   
 # **依赖**：python3.7、pytorch1.3.0    
-# **参考**:https://morvanzhou.github.io/tutorials/
 
 # 导入相应包
 import torch
@@ -22,20 +21,5 @@ class PAnet(torch.nn.Module):
         x = F.relu(self.hidden1(x)) 
         for i, h in enumerate(self.hidden2):
             x = F.relu(h(x))
-        x = self.predict(x) # linear output
-        return x
-
-class OldPAnet(torch.nn.Module):
-    def __init__(self, n_feature, n_hidden, n_output):
-        super(OldPAnet, self).__init__()
-        self.hidden1 = torch.nn.Linear(n_feature, n_hidden)   # hidden1 layer
-        self.hidden2 = torch.nn.Linear(n_hidden, n_hidden)   # hidden2 layer
-        self.predict = torch.nn.Linear(n_hidden, n_output)   # output layer        
-        
-    def forward(self, x):
-        x = F.relu(self.hidden1(x)) 
-        x = F.relu(self.hidden2(x)) 
-        x = F.relu(self.hidden2(x)) 
-        x = F.relu(self.hidden2(x)) 
         x = self.predict(x) # linear output
         return x
